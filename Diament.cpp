@@ -14,7 +14,7 @@ int main ()
 			for(int j=1; j<=n; j++)
 			{
 				if((i*j) %2 == 0)
-					cout<<"*";
+					cout<<"#";
 				else
 					cout<<".";
 			}
