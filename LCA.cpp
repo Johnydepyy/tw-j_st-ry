@@ -16,7 +16,7 @@ bool visited_1[END];
 // Pierwszy to rodzic, a drugi to dizecko
 bool children(int u, int v)
 {
-    return (pre[u] >= pre[v] && post[u] < post[v]);
+    return (pre[u] >= pre[v] && post[v] < post[u]);
 }
 // Przykład gdzie 4 i 5 z pz\rzykładowego
 int lca(int u, int v) // u =4, v= 5;
@@ -28,7 +28,7 @@ int lca(int u, int v) // u =4, v= 5;
     int i = u, j = 19; // i =4;
     while (j >= 0)
     {
-        if (children(wierz_pot[j][i],v))       j--;
+        if (children(wierz_pot[j][i], v))       j--;
         // czy 5 jest rodzicem dla skoku z 4, 2 do 19,18 i tak dalej;
         else
             i = wierz_pot[j][i];
@@ -74,8 +74,11 @@ int main()
         for (int j = 1; j < END; j++)
             wierz_pot[i][j] = wierz_pot[i - 1][wierz_pot[i - 1][j]];
     for (auto i : Q)
-        if (dist[i.first] > dist[i.second])
+    {
+        cout<<lca(i.first, i.second);
+        /*if (dist[i.first] > dist[i.second])
             cout << dist[i.first] - dist[i.second] - (2 * dist[lca(i.first, i.second)]) << "\n";
         else
-            cout << dist[i.second] - dist[i.first] - (2 * dist[lca(i.second, i.first)]) << "\n";
+            cout << dist[i.second] - dist[i.first] - (2 * dist[lca(i.second, i.first)]) << "\n";*/
+    }
 }
