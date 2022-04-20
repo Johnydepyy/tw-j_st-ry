@@ -14,6 +14,7 @@ int where[SIZE];
 int main ()
 {
     ios_base::sync_with_stdio(0);
+    //twój stary 
 	cin.tie(0), cout.tie(0);
     int r;
     cin>>r;
