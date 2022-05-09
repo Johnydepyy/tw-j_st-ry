@@ -1,46 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
-long long const SIZE=5*1e5;
-long long END=1e6;
-int n, m, b, a,j=1, r, d;
-vector <pair <int, int> > wiktor;
-vector <int> neighb_wiktor[SIZE];
-int res[SIZE];
-queue <int> queq;
-bool visited[SIZE];
-int st[SIZE];
+long long const SIZE = 5 * 1e5;
+long long END = 1e6;
+long long n, m, res, a, k, d, mn;
+char x;
+set<pair<long long , long long >> secik;
+long long arr[SIZE];
+bool vis[SIZE];
+int dist[SIZE];
+int Q[SIZE];
+pair<int, int> t;
 int main()
 {
-	ios::sync_with_stdio(0);
-	cin.tie(0), cout.tie(0);
-	cin>>r;
-	for(int y=1;y<=r;y++)
-	{
-    cin>>n>>m, j=1;
-    for(int i=1;i<=m;i++)
-        cin>>a>>b, st[b]++, neighb_wiktor[a].push_back(b);
-    //for(int i=1;i<=n;i++)   sort(neighb_wiktor[i].begin(), neighb_wiktor[i].end());
-    for(int i=1;i<=n;i++)   
-        if(st[i]==0)    queq.push(i);
-    for(int i=1;i<=n;i++)   res[i]=END;
-    while(!queq.empty())
+    ios::sync_with_stdio(0);
+    cin.tie(0), cout.tie(0);
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+        cin >> d, secik.insert({d, i}), Q[i] = d;
+    cin >> m;
+    for (int i = 1; i <= m; i++)
     {
-        int u = queq.front();
-        queq.pop();
-        res[j]=u;
-        for(auto i : neighb_wiktor[u]){
-            st[i]--;
-            if(st[i]==0)    queq.push(i);
+        cin >> x;
+        if (x == 'R')
+        {
+            cin >> k >> d;
+            if(!secik.count({Q[k], k})) continue;
+            secik.erase({Q[k], k});
+            Q[k] -= d;
+            secik.insert({Q[k], k});
         }
-        j++;
+        if (x == 'M')
+        {
+            res++;
+            auto e = secik.end();
+            e--
+            pair<int ,int> t= e*;
+            // cout<<"TWIERDZE ŻE TO KONIEC KOLEJKI = "<<r.first<<" "<<r.second;
+            secik.erase(t), dist[res] = t.second;
+        }
     }
-    for(int i=1;i<=n;i++)   
-        if(res[i]==END)     d++;
-    if(d <= n+1 && d > 0 && n!=0)	cout<<"TAK\n";
-	else				cout<<"NIE\n";
-	d=0; 
-	for(int i=1;i<=n;i++)	st[i]=0;
-	for(int i=1;i<=m;i++)	neighb_wiktor[i].clear();
-
-	}
+    for (int i = 1; i <= res; i++)
+        cout << dist[i] << " ";
 }
